@@ -1,19 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Check Maven') {
-            steps {
-                sh 'mvn --version'
-            }
+        tools {
+            maven 'maven'
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-        stage('Checkout') {
-            steps {
-                checkout scm
+                sh 'docker run --rm -v "$WORKSPACE:/app" -w /app maven:3.9.9-eclipse-temurin-21 mvn clean package -DskipTests'
             }
         }
         stage('Build Image') {
