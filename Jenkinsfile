@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker run --rm -v "$WORKSPACE:/app" -w /app maven:3.9.9-eclipse-temurin-21 mvn clean package -DskipTests'
+                sh 'docker run --rm -v "$WORKSPACE:/app" -w /app maven:3.9.9-eclipse-temurin-21 mvn clean package'
             }
         }
         stage('Build Image') {
